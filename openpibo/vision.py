@@ -24,6 +24,8 @@ import openpibo_face_models
 import openpibo_dlib_models
 import openpibo_detect_models
 
+from packaging import version
+
 def vision_api(mode, image, params={}):
   """
   인공지능 비전 API를 호출합니다.
@@ -1067,7 +1069,12 @@ Functions:
       [0.00000000e+00,0.00000000e+00,1.00000000e+00]])
     self.distortion_coeff = np.array([1.69926613e-01,-7.40003491e-01,-7.45655262e-03,-1.79442353e-03, 2.46650225e+00])
     self.dictionary = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50)
-    self.parameters = cv2.aruco.DetectorParameters_create()
+    #self.dictionary = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_4X4_50)
+    if version.parse(cv2.__version__) >= version.parse("4.7.0"):
+      self.parameters = cv2.aruco.DetectorParameters()
+    else:
+      self.parameters = cv2.aruco.DetectorParameters_create()
+
 
   def detect_object(self, img):
     """
