@@ -110,6 +110,10 @@ Functions:
       self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
     self.cap.set(cv2.CAP_PROP_BUFFERSIZE, 1) # for opencv buffering issue
 
+    if version.parse(cv2.__version__) >= version.parse("4.7.0"):
+      # without this cap, cv2 capture 1-dim array
+      self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc('M','J','P','G'))
+
   def imread(self, filename):
     """
     이미지 파일을 읽습니다.
