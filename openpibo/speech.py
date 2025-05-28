@@ -175,7 +175,23 @@ Functions:
 
   def __init__(self):
     self.dialog_db = []
-    self.mecab = Mecab()
+    dic_path = '/usr/local/lib/mecab/dic/mecab-ko-dic'
+    if not os.path.exists(dic_path):
+      # check for pip installed mecab-ko-dic
+      import sysconfig
+
+      site_packages_path = sysconfig.get_path('purelib')
+      dic_path = f'{site_packages_path}/mecab_ko_dic'
+      if os.path.exists(dic_path):
+        if os.path.exists(f'{dic_path}/sys.dic'):
+          pass
+        elif os.path.exists(f'{dic_path}/dicdir/sys.dic'):
+          dic_path = f'{dic_path}/dicdir'
+
+      self.mecab = Mecab(dic_path)
+    else:
+      self.mecab = Mecab()
+
     self.NAPI_HOST = napi_host
     self.load(openpibo_models.filepath("dialog.csv"))
 
