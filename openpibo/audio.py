@@ -93,7 +93,7 @@ Functions:
       audio.stop()
     """
 
-    os.system('sudo pkill play')
+    os.system('pkill play')
 
   def mute(self, value):
     """파이보를 무음모드로 만듭니다.
