@@ -32,6 +32,29 @@ Functions:
   # filename: mp3/wav
   def __init__(self):
     os.system(f'gpio mode 7 out;gpio write 7 {HIGH}')
+    self.control = self._get_mixer_control()
+
+  @staticmethod
+  def _get_mixer_control():
+    """
+    Headphones 디바이스의 mixer 컨트롤 이름을 얻는다.
+    buster에서는 Headphone, bookwarm에서는 PCM이다.
+
+    e.g) 'PCM',0 or 'Headphone',0
+    """
+    out = os.popen("amixer -c Headphones").readlines()
+
+    control = "PCM"
+    for l in out:
+      l = l.strip()
+      if l == "":
+        continue
+      if l.startswith("Simple mixer control"):
+        control = l[20:].strip()
+        break
+
+    return control
+
 
   def play(self, filename, volume=80, background=True, volume2=1.0):
     """
@@ -76,7 +99,7 @@ Functions:
       raise Exception(f'"{volume2}" is float(0.0~1.5)')
 
     volume = int(volume/2) + 50 # 실제 50 - 100%로 설정, 0-50%는 소리가 너무 작음
-    cmd = f'amixer -q -c Headphones sset Headphone {volume}%;'
+    cmd = f'amixer -q -c Headphones sset {self.control} {volume}%;'
     #cmd = f'amixer -q -c MAX98357A sset Headphone {volume}%;'
     cmd += f'play -q -V1 -v {volume2} "{filename}"'
 
