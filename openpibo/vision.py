@@ -13,7 +13,7 @@ import cv2,dlib,requests
 import os,pickle,math
 import numpy as np
 from PIL import Image,ImageDraw,ImageFont
-from tflite_runtime.interpreter import Interpreter
+from ai_edge_litert.interpreter import Interpreter
 from pyzbar import pyzbar
 from .modules.pose.movenet import Movenet
 from .modules.pose.utils import visualize
