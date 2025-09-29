@@ -1,0 +1,45 @@
+[project]
+name = "openpibo-python"
+version = "0.9.2.74"
+description = "openpibo-python package."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    'opencv-contrib-python>=4.5.4.60',
+    'dlib>=19.24.0',
+    'pyzbar>=0.1.8',
+    'beautifulsoup4>=4.6.0',
+    'konlpy>=0.5.2',
+    'tweepy>=3.10.0',
+    'future>=0.18.2',
+    'pillow>=7.2.0',
+    'RPi.gpio>=0.7.0',
+    'pyserial>=3.5',
+    'requests>=2.28.1',
+    #'tflite-runtime>=2.5.0',
+    'openpibo_models>=0.4.7',
+    'openpibo_face_models>=0.4.3',
+    'openpibo_detect_models>=0.4.4',
+    'openpibo_dlib_models>=0.4.2',
+]
+classifiers = [
+    'Natural Language :: English',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["openpibo"]
+
+[tool.hatch.build.targets.sdist]
+ignore-vcs = true
+only-include = ["openpibo", "README.md"]
