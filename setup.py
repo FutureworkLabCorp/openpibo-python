@@ -16,7 +16,7 @@ requirements = [
         'RPi.gpio>=0.7.0',
         'pyserial>=3.5',
         'requests>=2.28.1',
-        #'ai-edge-litert>=2.0.2',
+        'ai-edge-litert>=2.0.2',
         'openpibo_models>=0.4.7',
         'openpibo_face_models>=0.4.3',
         'openpibo_detect_models>=0.4.4',
@@ -40,10 +40,11 @@ setup(
     long_description_content_type = 'text/markdown',
     classifiers         = [
         'Natural Language :: English',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
     ],
     test_suite          = 'tests',
     tests_require       = test_requirements
